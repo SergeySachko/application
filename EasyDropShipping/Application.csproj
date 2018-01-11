@@ -9,6 +9,7 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.0.1" />
+    <PackageReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.0.0" />
@@ -21,6 +22,8 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
   </ItemGroup>
 
+ 
+  
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="ClientApp\**" />
@@ -36,8 +39,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\Account\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
 </Project>

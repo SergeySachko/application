@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -56,10 +57,26 @@ namespace Application
 
        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+        {            
+            app.UseDeveloperExceptionPage();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+
+            app.Use(async (context, next) => {
+                await next();
+                if (context.Response.StatusCode == 404 &&
+                   !Path.HasExtension(context.Request.Path.Value) &&
+                   !context.Request.Path.Value.StartsWith("/api/"))
+                {
+                    context.Request.Path = "/Admin.cshtml";
+                    await next();
+                }
+            });
+
+            app.UseMvcWithDefaultRoute();
 
         }
     }
