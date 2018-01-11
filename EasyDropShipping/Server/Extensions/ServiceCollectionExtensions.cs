@@ -1,4 +1,6 @@
-﻿using DAL;
+﻿using BBL;
+using BBLInterface;
+using DAL;
 using Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -64,7 +66,12 @@ namespace Application.Server.Extensions
         {
             services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
-            services.AddScoped<IDbContextFactory, DbContextFactory>();            
+            services.AddScoped<IDbContextFactory, DbContextFactory>();
+
+            services.AddScoped<IParserService, ParserService>();
+
+            services.AddScoped<IProductService, ProductService>();
+
 
             return services;
         }

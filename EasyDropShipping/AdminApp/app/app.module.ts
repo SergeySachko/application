@@ -6,13 +6,15 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './components/app/app.component';
 import { NavmenuComponent } from './components/navmenu/navmenu.component';
-import { HomeComponent } from './components/home/home.component' ;
+import { HomeComponent } from './components/home/home.component';
+import { ProductComponent } from './components/product/product.component' ;
 
 @NgModule({
   declarations: [
     AppComponent,
     NavmenuComponent,
-    HomeComponent
+    HomeComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

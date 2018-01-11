@@ -26,40 +26,78 @@ namespace BBL
             var web = new HtmlWeb();
             var doc = web.Load(url);
 
+            var result = ParseAliexpressPage(doc);
 
-            return null; 
+            if(result == null)
+            {
+                return new OperationResult()
+                {
+                    IsSucceded = false,
+                    ErrorMessage = "Parse wasn't success"
+                };
+            }
+
+            return new OperationResult()
+            {
+                IsSucceded = true,
+                Result = result
+            };
         }
 
         private ProductDTO ParseAliexpressPage(HtmlDocument document)
         {
-            ProductDTO product = new ProductDTO
+            try
             {
-                Title = document.DocumentNode.Descendants("h1")
-                                                  .Where(d => d.Attributes.Contains("class")
-                                                   && d.Attributes["class"].Value.Contains("product-name"))
-                                                  .FirstOrDefault().InnerHtml,
-                SalePrice = Double.Parse(document.DocumentNode.Descendants("span")
-                                                  .Where(d => d.Attributes.Contains("class")
-                                                   && d.Attributes["class"].Value.Contains("p-price"))
-                                                  .FirstOrDefault().InnerHtml),
-
-                SalePercent = short.Parse(document.DocumentNode.Descendants("span")
-                                                  .Where(d => d.Attributes.Contains("class")
-                                                   && d.Attributes["class"].Value.Contains("p-price"))
-                                                  .FirstOrDefault().InnerHtml),
-            };
 
 
-            // Get Regular price and parse it to double 
-            var regularPrice = document.DocumentNode.Descendants("span")
-                                                 .Where(d => d.Attributes.Contains("class")
-                                                  && d.Attributes["product-name"].Value.Contains("header-content-title"))
-                                                 .FirstOrDefault().InnerHtml;
-            product.RegularPrice = Double.Parse(regularPrice.Substring(0, regularPrice.IndexOf("-") + 1).Trim());
+                ProductDTO product = new ProductDTO
+                {
+                    Title = document.DocumentNode.Descendants("h1")
+                                                      .Where(d => d.Attributes.Contains("class")
+                                                       && d.Attributes["class"].Value.Contains("product-name"))
+                                                      .FirstOrDefault().InnerHtml,
+                    SalePrice = Double.Parse(document.DocumentNode.Descendants("span")
+                                                      .Where(d => d.Attributes.Contains("class")
+                                                       && d.Attributes["class"].Value.Contains("p-price"))
+                                                      .FirstOrDefault().InnerHtml),
+
+                    SalePercent = short.Parse(document.DocumentNode.Descendants("span")
+                                                      .Where(d => d.Attributes.Contains("class")
+                                                       && d.Attributes["class"].Value.Contains("p-price"))
+                                                      .FirstOrDefault().InnerHtml.Replace(@"-", "").Replace(@"%", "")),
+
+                    ImageURL = document.DocumentNode.Descendants("a")
+                                                      .Where(d => d.Attributes.Contains("class")
+                                                       && d.Attributes["class"].Value.Contains("ui-image-viewer-thumb-frame"))
+                                                      .FirstOrDefault()
+                                                      .Descendants("img")
+                                                      .FirstOrDefault()
+                                                      .Attributes["href"].Value,
+                    Description = document.DocumentNode.Descendants("div")
+                                                        .Where(d => d.Attributes.Contains("class")
+                                                        && d.Attributes["class"].Value.Contains("ui-box product-description-main"))
+                                                        .FirstOrDefault()
+                                                        .InnerHtml
+
+                };
 
 
+                // Get Regular price and parse it to double 
+                var regularPrice = document.DocumentNode.Descendants("span")
+                                                     .Where(d => d.Attributes.Contains("class")
+                                                      && d.Attributes["class"].Value.Contains("product-name"))
+                                                     .FirstOrDefault().InnerHtml;
+                product.RegularPrice = regularPrice.IndexOf("-") > 0 ? Double.Parse(regularPrice.Substring(0, regularPrice.IndexOf("-") + 1).Trim()) : Double.Parse(regularPrice);
 
-            return null;
+                return product;
+
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
+
+           
         }
     }
 }

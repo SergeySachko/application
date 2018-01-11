@@ -25,7 +25,7 @@ namespace Api
         [Authorize]
         [HttpGet]
         [Route("api/Product/Get")]
-        public IActionResult Get([FromBody]ProductDTO model)
+        public IActionResult Get([FromBody]int  productId)
         {
             return ReturnResponse(null);
         }
