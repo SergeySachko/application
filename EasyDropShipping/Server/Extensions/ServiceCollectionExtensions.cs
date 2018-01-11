@@ -23,7 +23,7 @@ namespace Application.Server.Extensions
                 }
                 else
                 {
-                    options.UseSqlServer(Startup.Configuration["Data:Dev:SqlServerConnectionString"], b => b.MigrationsAssembly("Application.DAL"));
+                    options.UseSqlServer(Startup.Configuration["Data:Dev:SqlServerConnectionString"], b => b.MigrationsAssembly("DAL"));
                 }
             });
             return services;

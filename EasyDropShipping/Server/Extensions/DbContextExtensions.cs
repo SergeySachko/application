@@ -15,7 +15,7 @@ namespace Application.Server.Extensions
         {
             if (context.AllMigrationsApplied())
             {
-                //var seed = new SeedDbData(host, context);
+                var seed = new SeedDbData(host, context);
             }
         }
 

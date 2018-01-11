@@ -10,19 +10,16 @@ namespace Entities
     public class ApplicationUser : IdentityUser<int>
     {
         public bool IsEnabled { get; set; }
+
         [DataType(DataType.DateTime)]
         public DateTime CreatedDate { get; set; }
-        [StringLength(250)]
-        public string FirstName { get; set; }
-        [StringLength(250)]
-        public string LastName { get; set; }
-        [NotMapped]
-        public string Name
+
+        public virtual ICollection<SubStatus> SubStatus { get; set; }
+
+        public ApplicationUser()
         {
-            get
-            {
-                return this.FirstName + " " + this.LastName;
-            }
-        }
+            SubStatus = new List<SubStatus>();
+        }        
+        
     }
 }
