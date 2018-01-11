@@ -13,13 +13,13 @@ namespace Application.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly UserManager<ApplicationUser> userManage;
-        private readonly SignInManager<ApplicationUser> signManager;
+        //private readonly UserManager<ApplicationUser> userManage;
+        //private readonly SignInManager<ApplicationUser> signManager;
 
-        public AccountController(UserManager<ApplicationUser> _userManage, SignInManager<ApplicationUser> _signManager)
+        public AccountController(/*UserManager<ApplicationUser> _userManage, SignInManager<ApplicationUser> _signManager*/)
         {
-            userManage = _userManage;
-            signManager = _signManager;
+            //userManage = _userManage;
+            //signManager = _signManager;
         }
 
         public IActionResult Index()
@@ -31,8 +31,8 @@ namespace Application.Controllers
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
         {
-
-            return View(new LoginViewModel() { ReturnUrl = returnUrl });
+            return RedirectToAction("Admin");
+           // return View(new LoginViewModel() { ReturnUrl = returnUrl });
         }
         
         [HttpPost]
@@ -43,22 +43,22 @@ namespace Application.Controllers
             if (ModelState.IsValid)
             {
 
-                var result = await signManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-                if (result.Succeeded)
-                {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    {
-                        return Redirect(model.ReturnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Wrong email or password");
-                }
+                //var result = await signManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                //if (result.Succeeded)
+                //{
+                //    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                //    {
+                //        return Redirect(model.ReturnUrl);
+                //    }
+                //    else
+                //    {
+                //        return RedirectToAction("Index", "Home");
+                //    }
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError("", "Wrong email or password");
+                //}
             }
             return View(model);
         }
@@ -67,11 +67,11 @@ namespace Application.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
-            await signManager.SignOutAsync();
+            //await signManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
 
-
+        [AllowAnonymous]
         public IActionResult Admin()
         {
             return View();
