@@ -26,6 +26,8 @@ namespace Application
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCustomDevDbContext();
+
             services.AddDependencies();
 
             services.AddCustomIdentity();
