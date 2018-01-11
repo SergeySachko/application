@@ -12,6 +12,8 @@ namespace DAL
     {
         DbSet<SubStatus> SubStatuses { get; set; }
 
+        DbSet<Product> Products { get; set; }
+
         int SaveChanges();
     }
 }

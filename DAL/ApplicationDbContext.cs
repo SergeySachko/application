@@ -10,6 +10,8 @@ namespace DAL
 
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+
         public DbSet<SubStatus> SubStatuses { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -20,6 +22,8 @@ namespace DAL
             ConfigureUserEntity(modelBuilder);
 
             ConfigureSubStatusEntity(modelBuilder);
+
+            ConfigureProductEntity(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -35,6 +39,12 @@ namespace DAL
         private void ConfigureSubStatusEntity(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SubStatus>()
+                .HasKey(br => br.Id);
+        }
+
+        private void ConfigureProductEntity(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>()
                 .HasKey(br => br.Id);
         }
 
