@@ -11,7 +11,7 @@ namespace Api
     {
         protected IActionResult ReturnResponse(OperationResult result)
         {
-            if (result.IsSucceded)
+            if (result != null && result.IsSucceded)
             {
                 if (result.Result != null)
                     return Ok(result.Result);

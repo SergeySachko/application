@@ -1,6 +1,8 @@
 ﻿using BBLInterface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Models;
+using Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,15 +15,23 @@ namespace Api
 
         public ParseController(IParserService _parserService)
         {
-            parserService = _parserService
+            parserService = _parserService;
+        }
+
+        
+        [HttpPost]
+        [Route("api/Parser/ByUrl")]
+        public IActionResult ParseByUrl([FromBody]ParserRequest parserRequest)
+        {
+            return ReturnResponse(parserService.AddProductByURL(parserRequest.ProductUrl));
         }
 
         [Authorize]
-        [HttpPost]
-        [Route("api/Parser/ByUrl")]
-        public IActionResult ParseByUrl([FromBody]string parseUrl)
+        [HttpGet]
+        [Route("api/Parser/GetByUrl")]
+        public IActionResult GetParseByUrl()
         {
-            return ReturnResponse(parserService.AddProductByURL(parseUrl));
+            return ReturnResponse(new OperationResult() { IsSucceded = true, Result = "Parse" });
         }
     }
 }

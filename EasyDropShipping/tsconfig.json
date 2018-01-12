@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "ClientApp",
+    "baseUrl": "AdminApp",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",

@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ParseService } from './parse.service';
+import { ParserService } from './parser.service';
 
 describe('ParseService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ParseService]
+      providers: [ParserService]
     });
   });
 
-  it('should be created', inject([ParseService], (service: ParseService) => {
+  it('should be created', inject([ParserService], (service: ParserService) => {
     expect(service).toBeTruthy();
   }));
 });

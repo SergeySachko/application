@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using Models.DTO;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Api
         [Route("api/Product/Get")]
         public IActionResult Get([FromBody]int  productId)
         {
-            return ReturnResponse(null);
+            return ReturnResponse(new OperationResult() { IsSucceded = true,Result = "Text"});
         }
 
         [Authorize]

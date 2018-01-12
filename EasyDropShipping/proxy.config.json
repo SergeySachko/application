@@ -2,5 +2,7 @@
   "/api": {
     "target": "http://localhost:5000/",
     "secure": false
-  }
+  },
+  "/http": "npm:/bundles/common-http.umd.js",
+  "tslib": "npm:tslib/tslib.js"
 }

@@ -56,7 +56,7 @@ namespace BBL
                                                       .Where(d => d.Attributes.Contains("class")
                                                        && d.Attributes["class"].Value.Contains("product-name"))
                                                       .FirstOrDefault().InnerHtml,
-                    SalePrice = Double.Parse(document.DocumentNode.Descendants("span")
+                    /*SalePrice = Double.Parse(document.DocumentNode.Descendants("span")
                                                       .Where(d => d.Attributes.Contains("class")
                                                        && d.Attributes["class"].Value.Contains("p-price"))
                                                       .FirstOrDefault().InnerHtml),
@@ -77,17 +77,17 @@ namespace BBL
                                                         .Where(d => d.Attributes.Contains("class")
                                                         && d.Attributes["class"].Value.Contains("ui-box product-description-main"))
                                                         .FirstOrDefault()
-                                                        .InnerHtml
+                                                        .InnerHtml*/
 
                 };
 
 
                 // Get Regular price and parse it to double 
-                var regularPrice = document.DocumentNode.Descendants("span")
-                                                     .Where(d => d.Attributes.Contains("class")
-                                                      && d.Attributes["class"].Value.Contains("product-name"))
-                                                     .FirstOrDefault().InnerHtml;
-                product.RegularPrice = regularPrice.IndexOf("-") > 0 ? Double.Parse(regularPrice.Substring(0, regularPrice.IndexOf("-") + 1).Trim()) : Double.Parse(regularPrice);
+                //var regularPrice = document.DocumentNode.Descendants("span")
+                //                                     .Where(d => d.Attributes.Contains("class")
+                //                                      && d.Attributes["class"].Value.Contains("product-name"))
+                //                                     .FirstOrDefault().InnerHtml;
+                //product.RegularPrice = regularPrice.IndexOf("-") > 0 ? Double.Parse(regularPrice.Substring(0, regularPrice.IndexOf("-") + 1).Trim()) : Double.Parse(regularPrice);
 
                 return product;
 
@@ -95,6 +95,7 @@ namespace BBL
             catch(Exception e)
             {
                 return null;
+                throw e;
             }
 
            

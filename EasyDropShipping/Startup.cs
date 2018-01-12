@@ -63,22 +63,29 @@ namespace Application
             app.UseDeveloperExceptionPage();
 
             app.UseDefaultFiles();
+
             app.UseStaticFiles();
 
             app.UseAuthentication();
 
-            app.Use(async (context, next) => {
+            app.Use(async (context, next) =>
+            {
                 await next();
                 if (context.Response.StatusCode == 404 &&
                    !Path.HasExtension(context.Request.Path.Value) &&
-                   !context.Request.Path.Value.StartsWith("/api/"))
+                   !context.Request.Path.Value.StartsWith("/admin/"))
                 {
-                    context.Request.Path = "/Admin.cshtml";
+                    context.Request.Path = "/Index.html";
                     await next();
                 }
             });
 
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
 
         }
     }
