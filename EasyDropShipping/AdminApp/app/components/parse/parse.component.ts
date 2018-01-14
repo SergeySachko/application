@@ -11,6 +11,7 @@ export class ParseComponent implements OnInit {
 
   @Input() productUrl:string;  
   title:string;
+  data:string;
   parserRequst:ParserRequestModel = new ParserRequestModel();
 
   constructor(private parserService:ParserService) {     
@@ -23,6 +24,7 @@ export class ParseComponent implements OnInit {
     this.parserRequst.productUrl = this.productUrl;
     this.parserService.parseByUrl(this.parserRequst).subscribe(response =>{             
         this.title =  response.title;
+        this.data  = response.description;
     });
   }
 }

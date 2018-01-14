@@ -72,15 +72,19 @@ namespace BBL
                                                       .FirstOrDefault()
                                                       .Descendants("img")
                                                       .FirstOrDefault()
-                                                      .Attributes["href"].Value,
-                    Description = document.DocumentNode.Descendants("div")
-                                                        .Where(d => d.Attributes.Contains("class")
-                                                        && d.Attributes["class"].Value.Contains("ui-box product-description-main"))
-                                                        .FirstOrDefault()
-                                                        .InnerHtml*/
+                                                      .Attributes["href"].Value,*/                   
 
                 };
 
+                var description = document.DocumentNode.Descendants("div").Where(d => d.Attributes.Contains("class")
+                                                       && d.Attributes["class"].Value.Contains("buyer-protection-banner"))
+                                                       .Select(s=>s.ChildNodes.Descendants("script"));
+
+
+                var resultDescription = "";
+
+               
+                product.Description = resultDescription;
 
                 // Get Regular price and parse it to double 
                 //var regularPrice = document.DocumentNode.Descendants("span")
