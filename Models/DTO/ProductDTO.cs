@@ -18,6 +18,7 @@ namespace Models.DTO
 
         public string VisibilityStr { get; set; }
 
+        //TODO : Change Name
         public string StrockStatusStr { get; set; }
 
         public double RegularPrice { get; set; }

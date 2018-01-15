@@ -55,28 +55,33 @@ namespace BBL
                     Title = document.DocumentNode.Descendants("h1")
                                                       .Where(d => d.Attributes.Contains("class")
                                                        && d.Attributes["class"].Value.Contains("product-name"))
-                                                      .FirstOrDefault().InnerHtml,
-                    /*SalePrice = Double.Parse(document.DocumentNode.Descendants("span")
+                                                      .FirstOrDefault().InnerHtml,                   
+
+                    /*SalePercent = short.Parse(document.DocumentNode.Descendants("span")
                                                       .Where(d => d.Attributes.Contains("class")
                                                        && d.Attributes["class"].Value.Contains("p-price"))
-                                                      .FirstOrDefault().InnerHtml),
-
-                    SalePercent = short.Parse(document.DocumentNode.Descendants("span")
+                                                      .FirstOrDefault().InnerHtml.Replace(@"-", "").Replace(@"%", "")),*/
+                }; 
+                var test = document.DocumentNode.Descendants("div")
                                                       .Where(d => d.Attributes.Contains("class")
-                                                       && d.Attributes["class"].Value.Contains("p-price"))
-                                                      .FirstOrDefault().InnerHtml.Replace(@"-", "").Replace(@"%", "")),
-
-                    ImageURL = document.DocumentNode.Descendants("a")
+                                                       && d.Attributes["class"].Value.Contains("product-price-main"))
+                                                      .FirstOrDefault()
+                                                      .Descendants("div")
+                                                      .Where(d => d.Attributes.Contains("class")
+                                                       && d.Attributes["class"].Value.Contains("p-current-price"))
+                                                      .FirstOrDefault()
+                                                      .Descendants("span")
+                                                      .Where(d => d.Attributes.Contains("class")
+                                                       && d.Attributes["class"].Value == "p-price")
+                                                      .FirstOrDefault().InnerText;
+                //product.SalePrice = Double.Parse("");
+                product.ImageURL = document.DocumentNode.Descendants("a")
                                                       .Where(d => d.Attributes.Contains("class")
                                                        && d.Attributes["class"].Value.Contains("ui-image-viewer-thumb-frame"))
                                                       .FirstOrDefault()
                                                       .Descendants("img")
                                                       .FirstOrDefault()
-                                                      .Attributes["href"].Value,*/                   
-
-                };
-
-                
+                                                      .Attributes["src"].Value;
                 product.Description = ParseDetails(document);
 
                 // Get Regular price and parse it to double 

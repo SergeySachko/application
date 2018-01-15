@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ParserService } from '../../services/parser.service';
 import { ParserRequestModel } from 'app/models/parserRequestModel';
 
@@ -9,14 +9,12 @@ import { ParserRequestModel } from 'app/models/parserRequestModel';
 })
 export class ParseComponent implements OnInit {
 
-  @Input() productUrl:string;  
-  title:string;
-  data:string;
-  elementId:string;
-  parserRequst:ParserRequestModel = new ParserRequestModel();
+  @Input() productUrl:string;   
+  @Output() onGetProduct: EventEmitter<any> = new EventEmitter<any>();
+ 
+  parserRequst:ParserRequestModel = new ParserRequestModel(); 
 
-  constructor(private parserService:ParserService) {     
-    this.elementId = "elementIdtiny";
+  constructor(private parserService:ParserService) {        
   }
 
   ngOnInit() {
@@ -25,8 +23,10 @@ export class ParseComponent implements OnInit {
   getProduct(){
     this.parserRequst.productUrl = this.productUrl;
     this.parserService.parseByUrl(this.parserRequst).subscribe(response =>{             
-        this.title =  response.title;
-        this.data  = response.description;
+      this.onGetProductInfo(response);       
     });
+  }
+  onGetProductInfo(response:any){
+    this.onGetProduct.emit(response);  
   }
 }
