@@ -76,15 +76,8 @@ namespace BBL
 
                 };
 
-                var description = document.DocumentNode.Descendants("div").Where(d => d.Attributes.Contains("class")
-                                                       && d.Attributes["class"].Value.Contains("buyer-protection-banner"))
-                                                       .Select(s=>s.ChildNodes.Descendants("script"));
-
-
-                var resultDescription = "";
-
-               
-                product.Description = resultDescription;
+                
+                product.Description = ParseDetails(document);
 
                 // Get Regular price and parse it to double 
                 //var regularPrice = document.DocumentNode.Descendants("span")
@@ -103,6 +96,30 @@ namespace BBL
             }
 
            
+        }
+
+        private string ParseDetails(HtmlDocument document)
+        {
+            var scriptOfDetails = document.DocumentNode.Descendants().Where(d => d.Name.Contains("script")); ;
+            string script = "";
+            foreach (var item in scriptOfDetails)
+            {
+                if (item.InnerText.Contains("window.runParams.detailDesc"))
+                {
+                    script += item.InnerText.ToString();
+                }
+
+            }
+            string modifiedScriptStr = script.Substring(script.IndexOf("window.runParams.detailDesc"), script.Length - script.IndexOf("window.runParams.detailDesc"));
+            string detailUrl = modifiedScriptStr.Substring(modifiedScriptStr.IndexOf("=") + 1, modifiedScriptStr.IndexOf(";"));
+            detailUrl = detailUrl.Substring(0, detailUrl.IndexOf(";"));
+
+            var web = new HtmlWeb();
+            var doc = web.Load(detailUrl.Trim('\"'));
+
+            return doc.ParsedText;
+
+
         }
     }
 }

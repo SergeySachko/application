@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { TinymceModule } from 'angular2-tinymce';
+
 
 import { AppComponent } from './components/app/app.component';
 import { NavmenuComponent } from './components/navmenu/navmenu.component';
@@ -13,6 +15,7 @@ import { ParseComponent } from './components/parse/parse.component' ;
 
 import { ParserService } from './services/parser.service';
 import { RequestHandlerHelper } from './services/request-handler-helper';
+import { TinymceEditorComponent } from './components/common/tinymce-editor.component/tinymce-editor.component.component';
 
 
 @NgModule({
@@ -21,12 +24,14 @@ import { RequestHandlerHelper } from './services/request-handler-helper';
     NavmenuComponent,
     HomeComponent,
     ProductComponent,
-    ParseComponent
+    ParseComponent,
+    TinymceEditorComponent
   ],
   imports: [
     BrowserModule,
     FormsModule, 
     HttpClientModule,
+    TinymceModule.withConfig({}),
     RouterModule.forRoot([                       
       { path: 'Account/Admin', redirectTo: 'home' },
       { path: 'home', component: HomeComponent },

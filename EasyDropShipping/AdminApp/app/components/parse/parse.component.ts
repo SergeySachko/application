@@ -12,9 +12,11 @@ export class ParseComponent implements OnInit {
   @Input() productUrl:string;  
   title:string;
   data:string;
+  elementId:string;
   parserRequst:ParserRequestModel = new ParserRequestModel();
 
   constructor(private parserService:ParserService) {     
+    this.elementId = "elementIdtiny";
   }
 
   ngOnInit() {
