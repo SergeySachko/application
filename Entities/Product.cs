@@ -8,7 +8,9 @@ namespace Entities
     public class Product
     {
         public int Id { get; set; }
-       
+
+        public string ProductBaseUrl { get; set; }
+
         public int ProductTypeId { get; set; }
         
         public int ProductCategoryId { get; set; }

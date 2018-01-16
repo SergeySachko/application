@@ -7,8 +7,8 @@ namespace BBLInterface
 {
     public interface IParserService
     {
-        OperationResult AddProductByURL(string url);
+        OperationResult ParseByUrl(string url);
 
-        OperationResult AddProductsByPage(string pageUrl);
+        OperationResult ParseByPage(string pageUrl);
     }
 }

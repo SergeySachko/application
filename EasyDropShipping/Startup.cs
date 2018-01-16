@@ -71,11 +71,9 @@ namespace Application
             app.Use(async (context, next) =>
             {
                 await next();
-                if (context.Response.StatusCode == 404 &&
-                   !Path.HasExtension(context.Request.Path.Value) &&
-                   !context.Request.Path.Value.StartsWith("/admin/"))
+                if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
                 {
-                    context.Request.Path = "/Index.html";
+                    context.Request.Path = "/Admin"; 
                     await next();
                 }
             });
@@ -84,7 +82,8 @@ namespace Application
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");                
+
             });
 
         }

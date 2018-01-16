@@ -8,11 +8,12 @@ namespace Models.DTO
     {
         public int Id { get; set; }
 
-        // TODO: Change Type 
-        public string ProductType { get; set; }
+        public string ProductBaseUrl { get; set; }
 
         // TODO: Change Type 
-        public string ProductCategory { get; set; }
+        public string ProductType { get; set; }
+        
+        public List<AttributeDTO> Attributes { get; set; }
 
         public string Title { get; set; }
 

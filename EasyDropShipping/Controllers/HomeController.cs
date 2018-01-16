@@ -11,6 +11,7 @@ namespace Application.Controllers
         public IActionResult Index()
         {
             return RedirectToAction("Admin", "Account");
+            //return View();
         }
     }
 }

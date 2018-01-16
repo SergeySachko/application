@@ -1,4 +1,5 @@
 import { Data } from "@angular/router/src/config";
+import { AttributeModel } from "app/models/attribute.model";
 
 export class ProductModel{
 
@@ -6,7 +7,7 @@ export class ProductModel{
 
     productType:string;
         
-    productCategory:string;
+    attributes:Array<AttributeModel> = new Array();
 
     productUrl:string;
     

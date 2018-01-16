@@ -23,7 +23,7 @@ namespace Api
         [Route("api/Parser/ByUrl")]
         public IActionResult ParseByUrl([FromBody]ParserRequest parserRequest)
         {
-            return ReturnResponse(parserService.AddProductByURL(parserRequest.ProductUrl));
+            return ReturnResponse(parserService.ParseByUrl(parserRequest.ProductUrl));
         }
 
         [Authorize]

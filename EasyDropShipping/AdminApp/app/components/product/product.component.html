@@ -1,7 +1,7 @@
 <div class="col-md-12">
   <app-parse  (onGetProduct)="getProduct($event)"></app-parse>
 </div>
-<div class="container" *ngIf="product.description">
+<div class="col-md-12" *ngIf="product.description">
   <div class="card">   
     <div class="col-md-4">
         <img src="{{product.imageURL}}"/>
@@ -14,6 +14,18 @@
         <div class="form-group col-md-12 col-xs-12" style="margin-top: 25px;">     
             <label>Price:</label>
             <input class="form-control" [(ngModel)]="product.price"/>
+        </div>
+        <div class="form-group col-md-12 col-xs-12" style="margin-top: 25px;">     
+          <div  *ngFor="let att of product.attributes; let i = index" class="p-item-main">
+              <div class="col-md-2">
+                  <span>{{att.name}} :</span>   
+              </div>
+              <div class="col-md-10">
+                  <ul>
+                      <li *ngFor="let term of att.terms; let i = index">{{term.name}}</li>
+                  </ul>
+              </div> 
+          </div>
         </div>
         <div class="form-group col-md-12 col-xs-12" style="margin-top: 25px;">    
           <label>Description:</label>
