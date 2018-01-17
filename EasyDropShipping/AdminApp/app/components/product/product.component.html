@@ -7,30 +7,48 @@
         <img src="{{product.imageURL}}"/>
     </div>
     <div class="col-md-8">
-        <div class="form-group col-md-12 col-xs-12" style="margin-top: 25px;">       
-          <label>Product Title:</label>
-          <input class="form-control" [(ngModel)]="product.title"/>
-        </div>
-        <div class="form-group col-md-12 col-xs-12" style="margin-top: 25px;">     
-            <label>Price:</label>
-            <input class="form-control" [(ngModel)]="product.price"/>
-        </div>
-        <div class="form-group col-md-12 col-xs-12" style="margin-top: 25px;">     
-          <div  *ngFor="let att of product.attributes; let i = index" class="p-item-main">
-              <div class="col-md-2">
-                  <span>{{att.name}} :</span>   
-              </div>
-              <div class="col-md-10">
-                  <ul>
-                      <li *ngFor="let term of att.terms; let i = index">{{term.name}}</li>
-                  </ul>
-              </div> 
-          </div>
-        </div>
-        <div class="form-group col-md-12 col-xs-12" style="margin-top: 25px;">    
-          <label>Description:</label>
-          <app-tinymce-editor   [elementId]="elementId" [content]="product.description"></app-tinymce-editor>
-        </div>       
+        <div id="tabs">
+            <ul>
+                <li (click)="showTab(1)"><span>Common</span></li>
+                <li (click)="showTab(2)"><span>Variable</span></li>
+                <li (click)="showTab(3)"><span>Smth</span></li>
+            </ul>
+            <div class="tab" *ngIf="tabcontainer == 1">
+                <div class="form-group col-md-12 col-xs-12" style="margin-top: 25px;">       
+                    <label>Product Title:</label>
+                    <input class="form-control" [(ngModel)]="product.title"/>
+                </div>
+                <div class="form-group col-md-12 col-xs-12" style="margin-top: 25px;">     
+                    <label>Price:</label>
+                    <input class="form-control" [(ngModel)]="product.price"/>
+                </div>
+                <div class="form-group col-md-12 col-xs-12" style="margin-top: 25px;">    
+                    <label>Description:</label>
+                    <app-tinymce-editor   [elementId]="elementId" [content]="product.description"></app-tinymce-editor>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tabcontainer == 2">
+                <div class="col-md-2 pull-right">
+                    <button class="btn btn-success">Добавить</button>
+                </div>
+                <div class="form-group col-md-10 col-xs-12 pull-left" style="margin-top: 25px;">     
+                    <div  *ngFor="let att of product.attributes; let i = index" class="p-item-main">
+                        <div class="col-md-2">
+                            <span>{{att.name}} :</span>   
+                        </div>
+                        <div class="col-md-10">
+                            <ul>
+                                <li *ngFor="let term of att.terms; let i = index">{{term.name}}</li>
+                            </ul>
+                        </div> 
+                    </div>
+                </div>    
+            </div>
+            <div class="tab" *ngIf="tabcontainer == 3">
+                <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+                <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+            </div>
+        </div>     
     </div>   
   </div>
 </div>

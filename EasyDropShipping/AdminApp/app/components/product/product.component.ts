@@ -10,9 +10,11 @@ export class ProductComponent implements OnInit {
 
   product:ProductModel = new ProductModel();
   elementId:string;
+  tabcontainer:number;
 
   constructor() {
     this.elementId = "elementIdtiny";
+    this.tabcontainer = 1;
    }
 
   ngOnInit() {
@@ -20,5 +22,10 @@ export class ProductComponent implements OnInit {
 
   getProduct(product:ProductModel){
     this.product = product;
+  }
+
+  showTab(i:number)
+  {
+    this.tabcontainer  = i;
   }
 }

@@ -19,3 +19,24 @@
 .p-item-main ul li:hover{
     cursor: pointer;
 }
+#tabs>ul{
+    display: inline-flex;
+    flex-direction: row;    
+    list-style-type: none;
+    margin-left: 0;
+    padding: 0;
+}
+#tabs>ul>li{
+    display: block;
+    margin-right: 10px;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 100;
+}
+#tabs>ul>li:hover{
+    cursor: pointer;
+}
+.tab{
+    display: flex;
+    flex-direction: column;
+}
