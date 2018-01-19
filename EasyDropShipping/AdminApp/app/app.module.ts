@@ -16,21 +16,29 @@ import { ParseComponent } from './components/parse/parse.component' ;
 import { ParserService } from './services/parser.service';
 import { RequestHandlerHelper } from './services/request-handler-helper';
 import { TinymceEditorComponent } from './components/common/tinymce-editor.component/tinymce-editor.component.component';
+import { AttributeComponent } from 'app/components/attribute/attribute.component';
+import { AttributeModalComponent } from 'app/components/common/attribute-modal/attribute-modal.component';
+import { DisplayModalService } from 'app/services/display-modal.service';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,    
     NavmenuComponent,
     HomeComponent,
     ProductComponent,
     ParseComponent,
-    TinymceEditorComponent
+    TinymceEditorComponent,
+    AttributeComponent,    
+    AttributeModalComponent
   ],
   imports: [
     BrowserModule,
     FormsModule, 
     HttpClientModule,
+    BootstrapModalModule.forRoot({ container: document.body }),
     TinymceModule.withConfig({}),
     RouterModule.forRoot([                       
       { path: 'Account/Admin', redirectTo: 'home' },
@@ -39,7 +47,8 @@ import { TinymceEditorComponent } from './components/common/tinymce-editor.compo
       { path: '**', redirectTo: 'home' }
   ]),
   ],
-  providers: [ParserService,RequestHandlerHelper],
-  bootstrap: [AppComponent]
+  providers: [ParserService,RequestHandlerHelper, DisplayModalService],
+  bootstrap: [AppComponent],
+  entryComponents : [AttributeModalComponent]
 })
 export class AppModule { }

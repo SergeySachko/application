@@ -1,0 +1,27 @@
+<div class="modal-dialog">
+  <div class="modal-content card">
+      <div class="modal-header">
+          <button type="button" class="close" (click)="close()">&times;</button>
+          <h3 class="modal-title">{{title || 'Confirm'}}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12">
+          <input type="text" class="form-control" [(ngModel)]="attribute.name" placeholder="Введиоте имя аттрибута" />         
+        </div>
+        
+        <div class="col-md-12">
+          <h4 class="pull-left">Варианты:</h4>
+          <button type="button" class="btn btn-success btn-sm pull-right" (click)="AddNewTerms()">
+            <span class="glyphicon glyphicon-plus"></span> Добавить
+          </button>
+        </div>
+        <div *ngFor="let term of attribute.terms; let i = index" class="col-md-12">
+          <input type="text" class="form-control colo-md-8" [(ngModel)]="term.name" placeholder="Введите вариант" />   
+          <a class="btn btn-xs btn-danger" style="float:right;padding: 6px 17px;" (click)="delete(term.id, i)">Удалить</a>
+        </div>                
+      </div>
+      <div class="modal-footer" style="display: flex">          
+        <button  (click)="confirm()" class="btn btn-success col-md-6" style="margin:0 auto">Сохранить</button>
+      </div>
+  </div>
+</div>

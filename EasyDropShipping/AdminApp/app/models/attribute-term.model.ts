@@ -8,5 +8,5 @@ export class AttributeTermModel{
 
     description:string;
 
-    parent:AttributeTermModel = new AttributeTermModel();
+    parent:AttributeTermModel;
 }

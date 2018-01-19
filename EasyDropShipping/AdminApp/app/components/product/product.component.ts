@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductModel } from 'app/models/product.model';
+import { DisplayModalService } from 'app/services/display-modal.service';
+import { AttributeModel } from 'app/models/attribute.model';
 
 @Component({
   selector: 'app-product',
@@ -12,7 +14,7 @@ export class ProductComponent implements OnInit {
   elementId:string;
   tabcontainer:number;
 
-  constructor() {
+  constructor(private  modalService:DisplayModalService) {
     this.elementId = "elementIdtiny";
     this.tabcontainer = 1;
    }
@@ -27,5 +29,11 @@ export class ProductComponent implements OnInit {
   showTab(i:number)
   {
     this.tabcontainer  = i;
+  }
+
+  addAttribute(){
+    this.modalService.showAttributeModal("Добавить новый аттрибут", new AttributeModel()).subscribe( (result:any) => {
+       this.product.attributes.push(result);
+    })
   }
 }
